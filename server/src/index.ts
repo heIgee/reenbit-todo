@@ -1,6 +1,9 @@
 import express from 'express';
+import {connectMongo} from './config/mongo.config.js';
 
 const app = express();
+
+connectMongo();
 
 app.get('/', (req, res) => {
   res.status(200).json({
