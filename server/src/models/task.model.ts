@@ -1,7 +1,7 @@
 import {model} from 'mongoose';
-import {ITask} from './task.interface.js';
+import {TaskDocument} from './task.document.js';
 import {taskSchema} from './task.schema.js';
 
-const Task = model<ITask>('Task', taskSchema);
+const Task = model<TaskDocument>('Task', taskSchema);
 
 export {Task};
