@@ -9,6 +9,11 @@ class TasksController {
     res.status(200).send(tasks);
   };
 
+  findById: RequestHandler = async (req, res) => {
+    const task = await tasksService.findById(req.params.id);
+    res.status(200).send(task);
+  };
+
   create: RequestHandler = async (req, res) => {
     const task = await tasksService.create(req.body as CreateTaskDto);
     res.status(201).send(task);

@@ -7,12 +7,16 @@ import {validateParamsId} from '@/middleware/validate-params-id.middleware.js';
 
 const tasksRouter = express.Router();
 
-tasksRouter.get('/', tasksController.findAll);
+tasksRouter
+  .route('/')
+  .get(tasksController.findAll)
+  .post(validateDto(CreateTaskDto), tasksController.create);
 
-tasksRouter.post('/', validateDto(CreateTaskDto), tasksController.create);
-
-tasksRouter.patch('/:id', validateParamsId, validateDto(UpdateTaskDto), tasksController.update);
-
-tasksRouter.delete('/:id', validateParamsId, tasksController.delete);
+tasksRouter
+  .route('/:id')
+  .all(validateParamsId)
+  .get(tasksController.findById)
+  .patch(validateDto(UpdateTaskDto), tasksController.update)
+  .delete(tasksController.delete);
 
 export {tasksRouter};
