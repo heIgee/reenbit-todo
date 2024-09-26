@@ -1,6 +1,7 @@
 import express from 'express';
 import {connectMongo} from './config/mongo.config.js';
 import {tasksRouter} from './routes/tasks.router.js';
+import {errorHandler} from './middleware/error-handler.middleware.js';
 
 const app = express();
 
@@ -16,6 +17,8 @@ app.get('/', (req, res) => {
     timestamp: new Date().toISOString()
   });
 });
+
+app.use(errorHandler);
 
 const PORT = process.env.PORT || 3000;
 

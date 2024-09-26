@@ -2,6 +2,7 @@ import {CreateTaskDto} from '@/dto/create-task.dto.js';
 import {UpdateTaskDto} from '@/dto/update-task.dto.js';
 import {TaskDocument} from '@/models/task.document.js';
 import {Task} from '@/models/task.model.js';
+import {AppError} from '@/utils/app-error.js';
 
 class TasksService {
   async create(taskDto: CreateTaskDto): Promise<TaskDocument> {
@@ -10,7 +11,7 @@ class TasksService {
   }
   async update(id: string, taskDto: UpdateTaskDto): Promise<TaskDocument> {
     const task = await Task.findById(id);
-    if (!task) throw new Error(`Task with id: ${id} is not found`);
+    if (!task) throw new AppError(404, `Task with id: ${id} is not found`);
     Object.assign(task, taskDto);
     return task.save();
   }
