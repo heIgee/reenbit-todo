@@ -4,6 +4,11 @@ import {UpdateTaskDto} from '@/dto/update-task.dto.js';
 import {tasksService} from '@/services/tasks.service.js';
 
 class TasksController {
+  findAll: RequestHandler = async (req, res) => {
+    const tasks = await tasksService.findAll();
+    res.status(200).send(tasks);
+  };
+
   create: RequestHandler = async (req, res) => {
     const task = await tasksService.create(req.body as CreateTaskDto);
     res.status(201).send(task);

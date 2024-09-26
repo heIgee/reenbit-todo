@@ -5,6 +5,10 @@ import {Task} from '@/models/task.model.js';
 import {AppError} from '@/utils/app-error.js';
 
 class TasksService {
+  async findAll(): Promise<TaskDocument[]> {
+    return Task.find();
+  }
+
   async create(taskDto: CreateTaskDto): Promise<TaskDocument> {
     const task = new Task(taskDto);
     return task.save();
