@@ -8,13 +8,15 @@ class TasksController {
     const task = await tasksService.create(req.body as CreateTaskDto);
     res.status(201).send(task);
   };
-  update: RequestHandler = async (req, res, next) => {
-    try {
-      const task = await tasksService.update(req.params.id, req.body as UpdateTaskDto);
-      res.status(200).send(task);
-    } catch (err) {
-      next(err);
-    }
+
+  update: RequestHandler = async (req, res) => {
+    const task = await tasksService.update(req.params.id, req.body as UpdateTaskDto);
+    res.status(200).send(task);
+  };
+
+  delete: RequestHandler = async (req, res) => {
+    const task = await tasksService.delete(req.params.id);
+    res.status(200).send(task);
   };
 }
 

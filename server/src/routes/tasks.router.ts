@@ -11,4 +11,6 @@ tasksRouter.post('/', validateDto(CreateTaskDto), tasksController.create);
 
 tasksRouter.patch('/:id', validateParamsId, validateDto(UpdateTaskDto), tasksController.update);
 
+tasksRouter.delete('/:id', validateParamsId, tasksController.delete);
+
 export {tasksRouter};

@@ -9,11 +9,19 @@ class TasksService {
     const task = new Task(taskDto);
     return task.save();
   }
+
   async update(id: string, taskDto: UpdateTaskDto): Promise<TaskDocument> {
     const task = await Task.findById(id);
     if (!task) throw new AppError(404, `Task with id: ${id} is not found`);
     Object.assign(task, taskDto);
     return task.save();
+  }
+
+  async delete(id: string): Promise<TaskDocument> {
+    const task = await Task.findById(id);
+    if (!task) throw new AppError(404, `Task with id: ${id} is not found`);
+    await task.deleteOne();
+    return task;
   }
 }
 
