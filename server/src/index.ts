@@ -1,9 +1,14 @@
 import express from 'express';
 import {connectMongo} from './config/mongo.config.js';
+import {tasksRouter} from './routes/tasks.router.js';
 
 const app = express();
 
 connectMongo();
+
+app.use(express.json());
+
+app.use('/tasks', tasksRouter);
 
 app.get('/', (req, res) => {
   res.status(200).json({
